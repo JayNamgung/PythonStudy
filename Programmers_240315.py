@@ -80,7 +80,8 @@ print(basic_day7(arr, queries)) #[3, 2, 4, 6, 4]
 def solution(l, r):
     num_list = []
     for num in range(l,r+1):
-        if set(str(num)) <= {'0', '5'}:
+        #if set(str(num)) <= {'0', '5'}:
+        if set(str(num)).issubset({'0','5'}):
             num_list.append(num)
     return num_list if num_list else [-1]
 
