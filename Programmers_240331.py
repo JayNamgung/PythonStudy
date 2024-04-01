@@ -112,12 +112,7 @@ print(solution(my_string, n))
 문자열 my_string이 매개변수로 주어질 때, my_string의 모든 접미사를 사전순으로 정렬한 문자열 배열을 return 하는 solution 함수를 작성해 주세요.
 '''
 def solution(my_string, is_suffix):
-  if len(is_suffix) > len(my_string):
-    return 0
-  elif len(is_suffix) == len(my_string):
-    return my_string == is_suffix
-  else:
-    return my_string[-len(is_suffix):] == is_suffix
+  return 1 if len(is_suffix) <= len(my_string) and my_string[-len(is_suffix):] == is_suffix else 0
 
 my_string = "banana"
 is_suffix = "ana"
