@@ -183,13 +183,14 @@ print(solution(my_string)) # 16
 자연수 n이 매개변수로 주어질 때 n의 소인수를 오름차순으로 담은 배열을 return하도록 solution 함수를 완성해주세요.
 '''
 def solution(n):
-    answer = []
-    for divisor in range(2, n + 1):
-        while n % divisor == 0:
-            answer.append(divisor)
-            n //= divisor
-    # 중복 제거
-    return list(set(answer))
+    answer = set()
+    num = 2
+    while n > 1:
+        while n % num == 0:
+            answer.add(num)
+            n //= num
+        num += 1
+    return sorted(answer)
 
 n = 12
 print(solution(n)) # [2, 3]
