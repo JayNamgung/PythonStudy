@@ -200,3 +200,144 @@ print(solution(n)) # [17]
 
 n = 420
 print(solution(n)) # [2, 3, 5, 7]
+
+
+
+'''
+정수 리스트 num_list와 정수 n이 주어질 때, n 번째 원소부터 마지막 원소까지의 모든 원소를 담은 리스트를 return하도록 solution 함수를 완성해주세요.
+'''
+def solution(num_list, n):
+    return num_list[n-1:]
+
+
+num_list = [2, 1, 6]
+n = 3
+print(solution(num_list, n)) # [6]
+
+num_list = [5, 2, 1, 7, 5]
+n = 2
+print(solution(num_list, n)) # [2, 1, 7, 5]
+
+
+'''
+정수 리스트 num_list와 정수 n이 주어질 때,
+num_list를 n 번째 원소 이후의 원소들과 n 번째까지의 원소들로 나눠
+n 번째 원소 이후의 원소들을 n 번째까지의 원소들 앞에 붙인 리스트를 return하도록 solution 함수를 완성해주세요.
+'''
+def solution(num_list, n):
+    return num_list[n:] + num_list[:n]
+
+num_list = [2, 1, 6]
+n = 1
+print(solution(num_list, n)) # [1, 6, 2]
+
+num_list = [5, 2, 1, 7, 5]
+n = 3
+print(solution(num_list, n)) # [7, 5, 5, 2, 1]
+
+
+
+'''
+문자열 리스트 str_list에는 "u", "d", "l", "r" 네 개의 문자열이 여러 개 저장되어 있습니다.
+str_list에서 "l"과 "r" 중 먼저 나오는 문자열이 "l"이라면 해당 문자열을 기준으로 왼쪽에 있는 문자열들을 순서대로 담은 리스트를,
+먼저 나오는 문자열이 "r"이라면 해당 문자열을 기준으로 오른쪽에 있는 문자열들을 순서대로 담은 리스트를 return하도록 solution 함수를 완성해주세요.
+"l"이나 "r"이 없다면 빈 리스트를 return합니다.
+'''
+def solution(str_list):
+    pivot_char = None
+    pivot_idx = None
+    result_group = []
+    for idx, char in enumerate(str_list):
+        # 문자 i, r 찾기
+        if char in ["l", "r"]:
+            pivot_char = char
+            pivot_idx = idx
+            break
+    # pivot_idx에 l,r이 있을 경우
+    if pivot_idx is not None:
+        if pivot_char == "l":
+            result_group = str_list[:pivot_idx]
+        else:
+            result_group = str_list[pivot_idx + 1:]
+    return result_group
+
+
+str_list = ["u", "u", "l", "r"]
+print(solution(str_list)) # ["u", "u"]
+
+str_list = ["l"]
+print(solution(str_list)) # []
+
+
+'''
+정수 리스트 num_list와 정수 n이 주어질 때, num_list의 첫 번째 원소부터 n 번째 원소까지의 모든 원소를 담은 리스트를 return하도록 solution 함수를 완성해주세요.
+'''
+def solution(num_list, n):
+    if n <= 0 or n > len(num_list):
+        return []
+    else:
+        return num_list[:n]
+
+
+num_list = [2, 1, 6]
+n = 1
+print(solution(num_list, n)) # [2]
+
+num_list = [5, 2, 1, 7, 5]
+n = 3
+print(solution(num_list, n)) # [5, 2, 1]
+
+
+'''
+정수 리스트 num_list와 정수 n이 주어질 때,
+num_list의 첫 번째 원소부터 마지막 원소까지 n개 간격으로 저장되어있는 원소들을 차례로 담은 리스트를 return하도록 solution 함수를 완성해주세요.
+'''
+def solution(num_list, n):
+    if n <= 0:
+        return []
+    else:
+        result = []
+    for i in range(len(num_list)):
+      if i % n == 0:
+        result.append(num_list[i])
+    return result
+
+num_list = [4, 2, 6, 1, 7, 6]
+n = 2
+print(solution(num_list, n)) # [4, 6, 7]
+
+num_list = [4, 2, 6, 1, 7, 6]
+n = 4
+print(solution(num_list, n)) # [4, 7]
+
+
+'''
+숫자와 "Z"가 공백으로 구분되어 담긴 문자열이 주어집니다.
+문자열에 있는 숫자를 차례대로 더하려고 합니다. 이 때 "Z"가 나오면 바로 전에 더했던 숫자를 뺀다는 뜻입니다.
+숫자와 "Z"로 이루어진 문자열 s가 주어질 때, 머쓱이가 구한 값을 return 하도록 solution 함수를 완성해보세요.
+'''
+def solution(s):
+    answer = 0
+    s_list = list(s.split())
+    for i in range(len(s_list)):
+        if s_list[i] == "Z":
+            answer -= int(s_list[i-1])
+        else:
+            answer += int(s_list[i])
+    return answer
+
+
+s = "1 2 Z 3"
+print(solution(s)) # 4
+
+s = "10 20 30 40"
+print(solution(s)) # 100
+
+s = "10 Z 20 Z 1"
+print(solution(s)) # 1
+
+s = "10 Z 20 Z"
+print(solution(s)) # 0
+
+s = "-1 -2 -3 Z"
+print(solution(s)) # -3
